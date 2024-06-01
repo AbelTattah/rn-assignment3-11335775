@@ -1,46 +1,85 @@
 // Tasks
 
-const Tasks = {
-    Categories:{
-        Study:[
-            "Statistics",
-            "Mathematics",
-            "Mobile App Development"
-        ],
-        Excercise:[
-            "Push Ups",
-            "Jogging",
-            "Plank"
-        ],
-        Cooking:[
-            "Breakfast",
-            "Supper",
-            "Dinner"
-        ],
-        Code:[
-            "Web Development",
-            "Bash Scripting",
-            "Mobile App Development"
-        ],
-        Cleaning:[
-            "Room",
-            "Kitchen",
-            "Bath"
-        ],
-        Washing:[
-            "Clothes",
-            "Shoes",
-            "Bag"
-        ],
-        Church:[
-            "Sunday Service",
-            "Friday Service"
-        ],
-        Entertainment:[
-            "Gaming",
-            "Movies",
-        ]
-    }
+const Categories = [
+    "Excersise",
+    "Study",
+    "Church",
+    "Entertainment",
+    "Cooking",
+    "Washing",
+    "Cleaning",
+    "Code"
+]
+
+const Tasks = [
+        {
+            task:"Statistics",
+            category:"Study"
+        },
+        {
+            task:"Mathematics",
+            category:"Study"
+        },
+        {
+            task:"Mobile App development",
+            category:"Study"
+        },
+        {
+            task:"Push Ups",
+            category:"Excersise"
+        },
+        {
+            task:"Jogging",
+            category:"Excercise"
+        },
+        {
+            task:"Plank",
+            category:"Excercise"
+        },
+        {
+            task:"Breakfast",
+            category:"Cooking"
+        },
+        {
+            task:"Supper",
+            category:"Cooking"
+        },
+        {
+            task:"Dinner",
+            category:"Cooking"
+        },
+        {
+            task:"Web Development",
+            category:"Code"
+        },
+        {
+            task:"Bash Scripting",
+            category:"Code"
+        },
+        {
+            task:"Mobile App Development",
+            category:"Code"
+        },
+        {
+            task:"Room",
+            category:"Cleaning"
+        },
+        {
+            task:"Clothes",
+            category:"Washing"
+        },
+        {
+            task:"Sunday Service",
+            category:"Church"
+        },
+        {
+            task: "Gaming",
+            category:"Entertainment"
+        }
+    ]
+
+export default function findTask(Category) {
+    return Tasks.filter((item)=>item.category==Category)
 }
 
-export default Tasks;
+export {Tasks,Categories};

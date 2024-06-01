@@ -4,12 +4,12 @@ import { View, Text, Image} from 'react-native'
 import React from 'react'
 import Colors from '../colors/colors'
 
-const CategoriesCard = ({category,count,image}) => {
+const CategoriesCard = ({category,count},image="None") => {
   return (
     <View style = {styles.container}>
        <Text style = {styles.name}>{category}</Text>
        <Text style = {styles.count}>{count}</Text>
-       <Image source={require(`../images/${image}`)} style = {styles.image}/>
+       {image=="None"?(<></>):(<Image source={require(`../images/${image}`)} style = {styles.image}/>)}
     </View>
   )
 }
