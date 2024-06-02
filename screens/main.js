@@ -1,43 +1,58 @@
-import { View, Text, SafeAreaView, TextInput, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TextInput,
+  ScrollView,
+  StyleSheet,
+  Image,
+} from "react-native";
 import { useState } from "react";
 import React from "react";
 import TaskCard from "../components/taskCard";
 import CategoriesCard from "../components/categoriesCard";
-import Tasks from "../tasks/tasks";
-import { findTask } from "../tasks/tasks";
+import { Tasks, Categories } from "../tasks/tasks";
+import findTask from "../tasks/tasks";
 import Colors from "../colors/colors";
+import Fonts from "../fonts/fonts";
 
 const Main = () => {
-  const [onGoingTasks, setOngoingTasks] = useState(findTask("Code"));
+  const [onGoingTasks, setOngoingTasks] = useState(Tasks);
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.main}>
-        {" "}
+      <ScrollView v style={styles.main}>
         <View style={styles.header}>
           <View style={styles.topCard}>
-            <Text style={styles.greeting}>Hello Devs</Text>
-            <Text style={styles.greeting}>14 Tasks today</Text>
+            <Text style={styles.greeting}>Hello, Devs</Text>
+            <Text style={styles.greetingInfo}>
+              {onGoingTasks.length} Tasks today
+            </Text>
           </View>
           <Image
             source={require("../images/profile_pic.png")}
             style={styles.profilePic}
           />
         </View>
-        <View>
-          <TextInput></TextInput>
+        <View style={styles.search}>
+          <TextInput
+            placeholderTextColor={"black"}
+            placeholder="Search"
+            style={styles.input}
+          ></TextInput>
+          <Image
+            source={require("../images/filter.png")}
+            style={styles.filter}
+          />
         </View>
-        <Text>Categories</Text>
+        <Text style={styles.sectionHeader}>Categories</Text>
         <ScrollView horizontal={true} style={styles.categories}>
-          {Tasks.map((item, index) => {
+          {Categories.map((item, index) => {
             return (
-              <CategoriesCard
-                category={item.category}
-                count={() => findTask(item.category).length}
-              />
+              <CategoriesCard category={item} count={findTask(item).length} />
             );
           })}
         </ScrollView>
-        <Text>Ongoing Task</Text>
+        <Text style={styles.sectionHeader}>Ongoing Task</Text>
         <ScrollView style={styles.tasks}>
           {onGoingTasks.map((item, index) => {
             return <TaskCard task={item.task} />;
@@ -57,26 +72,69 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  main:{
-    flex:0.9,
-    width:"90%"
+  main: {
+    width: "90%",
+    height: "100%",
+    paddingTop: 13,
   },
-  header:{
-    flexDirection:'row',
-    justifyContent:'spacebetween'
+  header: {
+    flexDirection: "row",
+    width: "100%",
+    fontFamily: Fonts.primary,
+    justifyContent: "space-between",
   },
-  topCard:{
-    flex:0.2
+  topCard: {
+    width: "60%",
   },
-  greeting:{
-    color:"black"
+  profilePic: {
+    width: 50,
+    height: 52,
   },
-  categories:{
-    flex:0.3,
-    gap:10
+  filter: {
+    height: 50,
+    width: 48,
   },
-  tasks:{
-    flex:0.3,
-    gap:10
-  }
+  greeting: {
+    fontSize: 38,
+    color: "black",
+    fontFamily: Fonts.primary,
+  },
+  greetingInfo: {
+    color: "black",
+    fontSize: 14,
+    fontFamily: Fonts.primary,
+  },
+  categories: {
+    height: 220,
+    gap: 10,
+    marginBottom: 30,
+    marginTop: 13,
+  },
+  tasks: {
+    flex: 1,
+    gap: 10,
+    marginTop: 10,
+    height: 280,
+  },
+  search: {
+    height: "10%",
+    paddingTop: 17,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 10,
+  },
+  input: {
+    height: 50,
+    width: "80%",
+    backgroundColor: Colors.primary100,
+    borderRadius: 10,
+    paddingLeft: 15,
+    borderWidth: 0.167,
+    borderStyle: "solid",
+    borderColor: "#ddd",
+  },
+  sectionHeader: {
+    fontSize: 20,
+    fontWeight:'bold'
+  },
 });
